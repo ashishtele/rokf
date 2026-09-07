@@ -14,6 +14,7 @@
 OKF Agent Memory solves the fundamental problem that **AI agent conversations are ephemeral**. When a context window resets, architectural decisions, domain discoveries, and operational facts are lost.
 
 OKF Agent Memory provides:
+
 - **Persistent knowledge** in your repository as plain Markdown + YAML (`knowledge/`)
 - **Zero vendor lock-in** — everything is Git-tracked, human-readable, auditable via `git diff`
 - **Sub-millisecond search** via in-memory BM25 (no vector DB, no embeddings, no API costs)
