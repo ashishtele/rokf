@@ -3,15 +3,14 @@ Title: R Interface to OKF Agent Memory
 Version: 0.1.0
 Authors@R: c(
   person("Ashish", "Tele", email = "agent.tele92@gmail.com", role = c("aut", "cre"),
-         comment = c(ORCID = "0000-0000-0000-0000"))
-)
+         comment = c(ORCID = "0009-0000-0000-0000"))
+  )
 Description: Provides an R-native interface to the OKF Agent Memory CLI (okf), a Git-native persistent memory layer for AI agents built on the Open Knowledge Format (OKF) v0.2. The package vendors pre-compiled binaries for Linux, macOS (Intel/Apple Silicon), and Windows, enabling zero-dependency installation. Use it to search, create, update, validate, and relate knowledge concepts in your project's version-controlled knowledge/ directory.
 License: MIT + file LICENSE
 URL: https://github.com/ashishtele/rokf
 BugReports: https://github.com/ashishtele/rokf/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 Config/testthat/edition: 3
 Depends: R (>= 4.1.0)
 Imports:
@@ -20,12 +19,15 @@ Imports:
     fs (>= 1.6.0),
     cli (>= 3.6.0),
     rlang (>= 1.1.0),
-    withr (>= 3.0.0)
+    withr (>= 3.0.0),
+    purrr,
+    tibble
 Suggests:
     testthat (>= 3.1.0),
     knitr,
     rmarkdown,
-    ellmer,
-    tidyllm
+    xml2,
+    pkgload
 SystemRequirements: None (pre-compiled binaries included)
 NeedsCompilation: no
+Config/roxygen2/version: 8.1.0

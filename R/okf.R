@@ -1,9 +1,12 @@
-#' @import processx
-#' @import jsonlite
-#' @import fs
 #' @import cli
+#' @import fs
+#' @import jsonlite
+#' @import processx
 #' @import rlang
 #' @import withr
+#' @importFrom magrittr %>%
+#' @importFrom purrr map_dfr map_chr
+#' @importFrom tibble tibble
 NULL
 
 #' Find the okf binary bundled with the package

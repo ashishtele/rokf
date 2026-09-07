@@ -86,14 +86,14 @@ okf_verbs <- function(bundle = "knowledge") {
       result <- okf_validate(bundle = bundle_path, strict = strict, drift = drift)
 
       msg <- if (result$gate_passed %||% result$is_conformant) {
-        sprintf("✅ Knowledge bundle valid: %d concepts, 0 errors", result$concept_count %||% 0)
-      } else {
-        errors <- result$errors %||% list()
-        warnings <- result$warnings %||% list()
-        sprintf("❌ Knowledge bundle has issues:\nErrors: %d\nWarnings: %d\n%s",
-          length(errors), length(warnings),
-          paste(c(errors, warnings), collapse = "\n"))
-      }
+              sprintf("[OK] Knowledge bundle valid: %d concepts, 0 errors", result$concept_count %||% 0)
+            } else {
+              errors <- result$errors %||% list()
+              warnings <- result$warnings %||% list()
+              sprintf("[ERROR] Knowledge bundle has issues:\nErrors: %d\nWarnings: %d\n%s",
+                length(errors), length(warnings),
+                paste(c(errors, warnings), collapse = "\n"))
+            }
 
       chat %>% tidyllm::add_message("system", msg)
     }

@@ -21,7 +21,7 @@ okf_skill <- function(bundle = "knowledge") {
     description = sprintf("Persistent project knowledge via OKF Agent Memory (bundle: %s)", bundle_path),
     functions = list(
       search = ellmer::tool(
-        function = function(query, limit = 10) {
+        `function` = function(query, limit = 10) {
           okf_search(query, bundle = bundle_path, limit = limit)
         },
         description = "Search project knowledge concepts using BM25 ranking. Use before creating new concepts.",
@@ -31,7 +31,7 @@ okf_skill <- function(bundle = "knowledge") {
         )
       ),
       show = ellmer::tool(
-        function = function(id) {
+        `function` = function(id) {
           okf_show(id, bundle = bundle_path)
         },
         description = "Get full concept details including frontmatter, body, and graph links",
@@ -40,7 +40,7 @@ okf_skill <- function(bundle = "knowledge") {
         )
       ),
       create = ellmer::tool(
-        function = function(id, type, title, description, body = NULL, tags = NULL) {
+        `function` = function(id, type, title, description, body = NULL, tags = NULL) {
           okf_create(id, type = type, title = title, desc = description, body = body, tags = tags, bundle = bundle_path)
         },
         description = "Create a new knowledge concept with automated bookkeeping. Search first!",
@@ -54,7 +54,7 @@ okf_skill <- function(bundle = "knowledge") {
         )
       ),
       update = ellmer::tool(
-        function = function(id, title = NULL, description = NULL, body = NULL) {
+        `function` = function(id, title = NULL, description = NULL, body = NULL) {
           okf_update(id, title = title, desc = description, body = body, bundle = bundle_path)
         },
         description = "Update an existing concept's metadata or body",
@@ -66,7 +66,7 @@ okf_skill <- function(bundle = "knowledge") {
         )
       ),
       validate = ellmer::tool(
-        function = function(strict = TRUE, drift = FALSE) {
+        `function` = function(strict = TRUE, drift = FALSE) {
           okf_validate(bundle = bundle_path, strict = strict, drift = drift)
         },
         description = "Validate knowledge bundle conformance and graph health",
