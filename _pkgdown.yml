@@ -1,0 +1,29 @@
+url: https://ashishtele.github.io/rokf/
+title: rokf
+
+template:
+  bootstrap: 5
+
+reference:
+- title: Bundle lifecycle
+  contents:
+  - okf_init
+  - okf_bootstrap
+  - okf_validate
+  - okf_available
+- title: Concepts
+  contents:
+  - okf_create
+  - okf_show
+  - okf_update
+  - okf_relate
+  - okf_search
+- title: Agent integrations
+  contents:
+  - okf_skill
+  - okf_agent_review
+  - okf_verbs
+- title: Utilities
+  contents:
+  - okf_version
+  - install_okf
