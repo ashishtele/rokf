@@ -82,10 +82,10 @@ jobs:
           rokf::okf_create("decisions/cache-ttl", bundle = kb,
             type = "Decision", title = "Redis Cache TTL",
             desc = "Default TTL 300s for session data")
-          rokf::okf_create("architecture/sessions", bundle = kb,
+          rokf::okf_create("decisions/session-store", bundle = kb,
             type = "Architecture", title = "Session Store",
             desc = "Sessions live in Redis behind the API gateway")
-          rokf::okf_relate("decisions/cache-ttl", "architecture/sessions",
+          rokf::okf_relate("decisions/cache-ttl", "decisions/session-store",
             bundle = kb, desc = "TTL applies to the session store")
           cat("=== SOURCE BODY ===\n")
           cat(rokf::okf_show("decisions/cache-ttl", bundle = kb)$body, "\n")
