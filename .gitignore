@@ -1,2 +1,4 @@
 rokf.Rcheck/
 Decision/
+tests/testthat/kb/
+tests/testthat/test-knowledge/
