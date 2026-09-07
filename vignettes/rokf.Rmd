@@ -85,7 +85,7 @@ cat(okf_show("decisions/cache-ttl", bundle = kb)$body)
 ### 6. Validate before you commit
 
 ```{r validate}
-result <- okf_validate(kb)
+result <- okf_validate(kb, strict = FALSE)
 result$is_conformant
 result$concept_count
 ```
