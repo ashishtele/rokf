@@ -1,0 +1,14 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.git$
+^\.github$
+^tests$
+^vignettes$
+^README\.md$
+^LICENSE$
+^\.Rbuildignore$
+^Makefile$
+^cran-comments\.md$
+^\.gitignore$
+^docker$
+^\.dockerignore$
