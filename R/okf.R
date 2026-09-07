@@ -71,7 +71,29 @@ okf_run <- function(args, bundle = "knowledge", verbose = FALSE, parse_json = TR
   # Normalize bundle path
   bundle <- fs::path_abs(bundle)
 
-  full_args <- c(args, bundle)
+  # Flags that take a value (keep value attached to flag)
+  value_flags <- c("--limit", "--type", "--title", "--desc", "--actor",
+                   "--body", "--tags", "--name")
+  flags <- c()
+  pos_args <- c()
+  i <- 1L
+  while (i <= length(args)) {
+    a <- args[i]
+    if (a %in% value_flags && i < length(args)) {
+      flags <- c(flags, a, args[i + 1L])
+      i <- i + 2L
+    } else if (grepl("^--", a)) {
+      flags <- c(flags, a)
+      i <- i + 1L
+    } else {
+      pos_args <- c(pos_args, a)
+      i <- i + 1L
+    }
+  }
+
+  # Bundle is a positional argument, comes before flags
+  full_args <- c(pos_args, bundle, flags)
+
   if (verbose) cli::cli_inform("Running: {.code {bin}} {paste(full_args, collapse = ' ')}")
 
   res <- processx::run(bin, full_args, error_on_status = FALSE, timeout = 30000)
@@ -151,7 +173,7 @@ okf_validate <- function(bundle = "knowledge", strict = TRUE, drift = FALSE, sta
 #' okf_search("architecture layers", limit = 5)
 #' }
 okf_search <- function(query, bundle = "knowledge", limit = 10, verbose = FALSE) {
-  args <- c("search", shQuote(query), "--limit", as.character(limit), "--json")
+  args <- c("search", query, "--limit", as.character(limit), "--json")
   res <- okf_run(args, bundle = bundle, verbose = verbose)
 
   if (is.list(res) && "results" %in% names(res)) {
