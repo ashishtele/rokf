@@ -30,6 +30,12 @@ Validation result object with errors, warnings, counts
 Runs full conformance check including graph connectivity, provenance integrity,
 and optional drift/stale gates.
 }
+\note{
+The Windows okf binary (v0.1.2) cannot resolve relative links, so
+strict validation rejects linked bundles on Windows even when the links
+are correct (upstream bug). Prefer same-directory links, or validate
+non-strict on Windows.
+}
 \examples{
 \dontrun{
 okf_validate("knowledge", strict = TRUE)

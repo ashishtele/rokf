@@ -137,6 +137,10 @@ is_okf_bundle <- function(path = "knowledge") {
 #' @param drift Check index.md descriptions against concept frontmatter
 #' @param stale Gate expired review dates as errors
 #' @param verbose Show command output
+#' @note The Windows okf binary (v0.1.2) cannot resolve relative links, so
+#'   strict validation rejects linked bundles on Windows even when the links
+#'   are correct (upstream bug). Prefer same-directory links, or validate
+#'   non-strict on Windows.
 #' @return Validation result object with errors, warnings, counts
 #' @export
 #' @examples

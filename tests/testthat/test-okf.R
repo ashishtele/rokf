@@ -105,6 +105,12 @@ testthat::test_that("okf_validate passes on connected bundle", {
   okf_relate("decisions/test", "architecture/sys",
              desc = "Test applies to Sys", bundle = kb)
 
-  result <- okf_validate(kb, strict = TRUE)
+  result <- okf_validate(kb)
   expect_true(result$is_conformant %||% result$gate_passed)
+
+  # Strict link-gating: skipped on Windows, where the okf v0.1.2 binary
+  # cannot resolve relative links (upstream bug, reports every link broken)
+  testthat::skip_on_os("windows")
+  strict <- okf_validate(kb, strict = TRUE)
+  expect_true(strict$is_conformant %||% strict$gate_passed)
 })

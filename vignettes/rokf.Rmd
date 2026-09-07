@@ -85,13 +85,16 @@ cat(okf_show("decisions/cache-ttl", bundle = kb)$body)
 ### 6. Validate before you commit
 
 ```{r validate}
-result <- okf_validate(kb, strict = TRUE)
+result <- okf_validate(kb)
 result$is_conformant
 result$concept_count
 ```
 
-`strict = TRUE` gates connectivity warnings and trust gaps as errors. Run this
-in CI or as a pre-commit hook — knowledge that does not validate does not merge.
+`okf_validate(kb, strict = TRUE)` additionally gates broken links, orphans,
+and provenance gaps as errors — run that in CI or as a pre-commit hook.
+Note: the Windows `okf` binary (v0.1.2) fails to resolve relative links, so
+strict validation rejects linked bundles on Windows even when the links are
+correct. Same-directory links validate strictly on Linux and macOS.
 
 ## Agent integrations
 
