@@ -21,7 +21,8 @@ Imports:
     rlang (>= 1.1.0),
     withr (>= 3.0.0),
     purrr,
-    tibble
+    tibble,
+    magrittr
 Suggests:
     testthat (>= 3.1.0),
     knitr,
