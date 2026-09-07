@@ -14,15 +14,7 @@ export(okf_update)
 export(okf_validate)
 export(okf_verbs)
 export(okf_version)
-import(cli)
-import(fs)
-import(jsonlite)
-import(processx)
-import(rlang)
-import(withr)
 importFrom(magrittr,"%>%")
-importFrom(purrr,
-  map_chr,
-  map_dfr
-)
+importFrom(purrr,map_chr)
+importFrom(rlang,`%||%`)
 importFrom(tibble,tibble)

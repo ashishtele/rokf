@@ -17,11 +17,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Ashish Tele \email{agent.tele92@gmail.com} (\href{https://orcid.org/0009-0000-0000-0000}{ORCID})
+\strong{Maintainer}: Ashish Tele \email{agent.tele92@gmail.com}
 
 Authors:
 \itemize{
-  \item Ashish Tele \email{agent.tele92@gmail.com} (\href{https://orcid.org/0009-0000-0000-0000}{ORCID})
+  \item Ashish Tele \email{agent.tele92@gmail.com}
 }
 
 }

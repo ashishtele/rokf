@@ -1,11 +1,6 @@
-#' @import cli
-#' @import fs
-#' @import jsonlite
-#' @import processx
-#' @import rlang
-#' @import withr
 #' @importFrom magrittr %>%
-#' @importFrom purrr map_dfr map_chr
+#' @importFrom purrr map_chr
+#' @importFrom rlang `%||%`
 #' @importFrom tibble tibble
 NULL
 
@@ -176,23 +171,24 @@ okf_search <- function(query, bundle = "knowledge", limit = 10, verbose = FALSE)
   args <- c("search", query, "--limit", as.character(limit), "--json")
   res <- okf_run(args, bundle = bundle, verbose = verbose)
 
-  if (is.list(res) && "results" %in% names(res)) {
-    # Convert to tidy data frame
-    results <- purrr::map_dfr(res$results, function(r) {
-      tibble::tibble(
-        rank = r$rank %||% NA_integer_,
-        score = r$score %||% NA_real_,
-        id = r$id %||% NA_character_,
-        type = r$type %||% NA_character_,
-        title = r$title %||% NA_character_,
-        description = r$description %||% NA_character_,
-        matches = paste(r$matches %||% character(), collapse = ", ")
-      )
-    })
-    return(results)
+  # Binary returns a bare JSON array (null when nothing matches)
+  if (is.null(res) || length(res) == 0) {
+    return(tibble::tibble())
   }
 
-  tibble::tibble()
+  # Convert to tidy data frame (base R only: purrr::map_dfr would pull in dplyr)
+  n <- length(res)
+  tibble::tibble(
+    rank = seq_len(n),
+    score = vapply(res, function(r) r$score %||% NA_real_, numeric(1)),
+    id = vapply(res, function(r) r$concept_id %||% NA_character_, character(1)),
+    type = vapply(res, function(r) r$type %||% NA_character_, character(1)),
+    title = vapply(res, function(r) r$title %||% NA_character_, character(1)),
+    description = vapply(res, function(r) r$description %||% NA_character_, character(1)),
+    matches = vapply(res, function(r) {
+      paste(unlist(r$matched_on) %||% character(), collapse = ", ")
+    }, character(1))
+  )
 }
 
 #' Show full concept details including frontmatter, body, and graph links
@@ -201,7 +197,9 @@ okf_search <- function(query, bundle = "knowledge", limit = 10, verbose = FALSE)
 #' @param bundle Path to knowledge bundle (default: "knowledge")
 #' @param raw Return raw markdown file instead of parsed structure
 #' @param verbose Show command output
-#' @return List with frontmatter, body, inbound/outbound links, or raw markdown string
+#' @return List with id, path, type, title, description, generated, body,
+#'   raw_content (links appear as a "Related Concepts" section in body),
+#'   or raw markdown string when raw = TRUE
 #' @export
 #' @examples
 #' \dontrun{

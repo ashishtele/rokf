@@ -16,7 +16,9 @@ okf_show(id, bundle = "knowledge", raw = FALSE, verbose = FALSE)
 \item{verbose}{Show command output}
 }
 \value{
-List with frontmatter, body, inbound/outbound links, or raw markdown string
+List with id, path, type, title, description, generated, body,
+raw_content (links appear as a "Related Concepts" section in body),
+or raw markdown string when raw = TRUE
 }
 \description{
 Show full concept details including frontmatter, body, and graph links

@@ -1,14 +1,6 @@
 #' @keywords internal
 "_PACKAGE"
 
-## usethis namespace: start
-#' @import processx
-#' @import jsonlite
-#' @import fs
-#' @import cli
-#' @import rlang
-#' @import withr
-## usethis namespace: end
 NULL
 
 .onLoad <- function(libname, pkgname) {

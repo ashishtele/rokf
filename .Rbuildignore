@@ -5,7 +5,6 @@
 ^tests$
 ^vignettes$
 ^README\.md$
-^LICENSE$
 ^\.Rbuildignore$
 ^Makefile$
 ^cran-comments\.md$

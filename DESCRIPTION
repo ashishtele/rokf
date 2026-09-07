@@ -2,8 +2,7 @@ Package: rokf
 Title: R Interface to OKF Agent Memory
 Version: 0.1.0
 Authors@R: c(
-  person("Ashish", "Tele", email = "agent.tele92@gmail.com", role = c("aut", "cre"),
-         comment = c(ORCID = "0009-0000-0000-0000"))
+  person("Ashish", "Tele", email = "agent.tele92@gmail.com", role = c("aut", "cre"))
   )
 Description: Provides an R-native interface to the OKF Agent Memory CLI (okf), a Git-native persistent memory layer for AI agents built on the Open Knowledge Format (OKF) v0.2. The package vendors pre-compiled binaries for Linux, macOS (Intel/Apple Silicon), and Windows, enabling zero-dependency installation. Use it to search, create, update, validate, and relate knowledge concepts in your project's version-controlled knowledge/ directory.
 License: MIT + file LICENSE

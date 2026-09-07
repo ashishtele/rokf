@@ -40,22 +40,12 @@ okf_verbs <- function(bundle = "knowledge") {
     # Show a concept and inject
     show = function(chat, id) {
       concept <- okf_show(id, bundle = bundle_path)
-      if (is.list(concept) && "frontmatter" %in% names(concept)) {
-        fm <- concept$frontmatter
-        body <- concept$body %||% ""
-        links <- c(
-          if (length(concept$inbound %||% list()) > 0)
-            sprintf("**Inbound:** %s", paste(concept$inbound, collapse = ", ")),
-          if (length(concept$outbound %||% list()) > 0)
-            sprintf("**Outbound:** %s", paste(concept$outbound, collapse = ", "))
-        )
-
+      if (is.list(concept) && !is.null(concept$id)) {
         context <- sprintf(
-          "## %s (%s)\n%s\n\n---\n%s\n\n%s",
-          fm$title %||% id, fm$type %||% "Concept",
-          fm$description %||% "",
-          paste(links, collapse = "\n"),
-          body
+          "## %s (%s)\n%s\n\n---\n%s",
+          concept$title %||% id, concept$type %||% "Concept",
+          concept$description %||% "",
+          concept$body %||% ""
         )
 
         chat %>% tidyllm::add_message("system", sprintf("Concept: %s\n\n%s", id, context))
