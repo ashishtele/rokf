@@ -1,0 +1,98 @@
+---
+title: "rokf: R Interface to OKF Agent Memory"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rokf: R Interface to OKF Agent Memory}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(rokf)
+# Work in a temp bundle so the vignette never touches the reader's files
+kb <- file.path(tempdir(), "vignette-kb")
+```
+
+## The problem
+
+AI agent conversations are ephemeral. When the context window resets,
+architectural decisions, domain discoveries, and operational facts are lost.
+OKF Agent Memory persists that knowledge as plain Markdown + YAML inside your
+repository (`knowledge/`), so it is Git-tracked, human-readable, and auditable
+via `git diff`. Retrieval is local BM25 — no vector database, no embeddings,
+no per-query API cost.
+
+`rokf` is the R interface to the `okf` CLI. The package vendors pre-compiled
+binaries, so there are no system dependencies to install.
+
+## The workflow: Read — Work — Remember
+
+Every agent session follows one loop: **search before you create**, do the
+work, persist what you learned, validate.
+
+### 1. Initialize a bundle
+
+```{r init}
+okf_init(kb)
+rokf:::is_okf_bundle(kb)
+```
+
+### 2. Create concepts (only after searching)
+
+```{r create}
+okf_create("decisions/cache-ttl", bundle = kb,
+  type  = "Decision",
+  title = "Redis Cache TTL",
+  desc  = "Default TTL 300s for session data")
+
+okf_create("architecture/sessions", bundle = kb,
+  type  = "Architecture",
+  title = "Session Store",
+  desc  = "Sessions live in Redis behind the API gateway")
+```
+
+### 3. Search existing knowledge
+
+```{r search}
+okf_search("session TTL", bundle = kb, limit = 5)
+```
+
+Search returns a tibble (`rank`, `score`, `id`, `type`, `title`,
+`description`, `matches`) — empty when nothing is relevant.
+
+### 4. Read a concept in full
+
+```{r show}
+concept <- okf_show("decisions/cache-ttl", bundle = kb)
+concept$title
+concept$description
+```
+
+### 5. Link related concepts
+
+Links are stored as relative Markdown links inside the source concept's body,
+so the graph can never fragment into orphans:
+
+```{r relate}
+okf_relate("decisions/cache-ttl", "architecture/sessions", bundle = kb,
+  desc = "TTL applies to the session store")
+```
+
+### 6. Validate before you commit
+
+```{r validate}
+result <- okf_validate(kb, strict = TRUE)
+result$is_conformant
+result$concept_count
+```
+
+`strict = TRUE` gates connectivity warnings and trust gaps as errors. Run this
+in CI or as a pre-commit hook — knowledge that does not validate does not merge.
+
+## Agent integrations
+
+For `ellmer` chat agents, `okf_skill()` registers search/show/create/update/
+validate as tools. For `tidyllm` pipelines, `okf_verbs()` provides
+search/show/persist/validate verbs that inject results as system messages.
+Both follow the same search-before-create contract enforced above.

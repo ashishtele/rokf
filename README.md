@@ -1,5 +1,7 @@
 # rokf: R Interface to OKF Agent Memory
 
+[![R-CMD-check](https://github.com/ashishtele/rokf/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ashishtele/rokf/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/ashishtele/rokf/graph/badge.svg)](https://app.codecov.io/gh/ashishtele/rokf)
 [![R](https://img.shields.io/badge/R-%3E%3D4.1-blue.svg)](https://www.r-project.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![okf version](https://img.shields.io/badge/okf-v0.1.2-brightgreen.svg)](https://github.com/okf-memory/okf-agent-memory/releases/tag/v0.1.2)

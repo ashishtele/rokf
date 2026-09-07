@@ -2,8 +2,6 @@
 ^\.Rproj\.user$
 ^\.git$
 ^\.github$
-^tests$
-^vignettes$
 ^README\.md$
 ^\.Rbuildignore$
 ^Makefile$
