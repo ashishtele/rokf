@@ -55,7 +55,20 @@
 <h2 id="what-is-okf-agent-memory">What is OKF Agent Memory?<a class="anchor" aria-label="anchor" href="#what-is-okf-agent-memory"></a>
 </h2>
 <p>OKF Agent Memory solves the fundamental problem that <strong>AI agent conversations are ephemeral</strong>. When a context window resets, architectural decisions, domain discoveries, and operational facts are lost.</p>
-<p>OKF Agent Memory provides: - <strong>Persistent knowledge</strong> in your repository as plain Markdown + YAML (<code>knowledge/</code>) - <strong>Zero vendor lock-in</strong> — everything is Git-tracked, human-readable, auditable via <code>git diff</code> - <strong>Sub-millisecond search</strong> via in-memory BM25 (no vector DB, no embeddings, no API costs) - <strong>Built-in trust &amp; provenance</strong> — explicit separation of <code>generated</code> (agent) vs <code>verified</code> (human) knowledge - <strong>Progressive disclosure</strong> — agents load only relevant concepts, slashing token bloat by ~80%</p>
+<p>OKF Agent Memory provides:</p>
+<ul>
+<li>
+<strong>Persistent knowledge</strong> in your repository as plain Markdown + YAML (<code>knowledge/</code>)</li>
+<li>
+<strong>Zero vendor lock-in</strong> — everything is Git-tracked, human-readable, auditable via <code>git diff</code>
+</li>
+<li>
+<strong>Sub-millisecond search</strong> via in-memory BM25 (no vector DB, no embeddings, no API costs)</li>
+<li>
+<strong>Built-in trust &amp; provenance</strong> — explicit separation of <code>generated</code> (agent) vs <code>verified</code> (human) knowledge</li>
+<li>
+<strong>Progressive disclosure</strong> — agents load only relevant concepts, slashing token bloat by ~80%</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>

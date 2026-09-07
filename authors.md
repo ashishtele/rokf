@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/ashishtele/rokf/blob/v0.1.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/ashishtele/rokf/blob/main/DESCRIPTION)
 
 Tele A (2026). *rokf: R Interface to OKF Agent Memory*. R package
 version 0.1.0, <https://github.com/ashishtele/rokf>.

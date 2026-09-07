@@ -22,14 +22,18 @@ conversations are ephemeral**. When a context window resets,
 architectural decisions, domain discoveries, and operational facts are
 lost.
 
-OKF Agent Memory provides: - **Persistent knowledge** in your repository
-as plain Markdown + YAML (`knowledge/`) - **Zero vendor lock-in** —
-everything is Git-tracked, human-readable, auditable via `git diff` -
-**Sub-millisecond search** via in-memory BM25 (no vector DB, no
-embeddings, no API costs) - **Built-in trust & provenance** — explicit
-separation of `generated` (agent) vs `verified` (human) knowledge -
-**Progressive disclosure** — agents load only relevant concepts,
-slashing token bloat by ~80%
+OKF Agent Memory provides:
+
+- **Persistent knowledge** in your repository as plain Markdown + YAML
+  (`knowledge/`)
+- **Zero vendor lock-in** — everything is Git-tracked, human-readable,
+  auditable via `git diff`
+- **Sub-millisecond search** via in-memory BM25 (no vector DB, no
+  embeddings, no API costs)
+- **Built-in trust & provenance** — explicit separation of `generated`
+  (agent) vs `verified` (human) knowledge
+- **Progressive disclosure** — agents load only relevant concepts,
+  slashing token bloat by ~80%
 
 ## Installation
 
