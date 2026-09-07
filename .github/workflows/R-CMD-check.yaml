@@ -91,8 +91,14 @@ jobs:
           cat(rokf::okf_show("decisions/cache-ttl", bundle = kb)$body, "\n")
           cat("=== BUNDLE FILES ===\n")
           print(list.files(kb, recursive = TRUE))
-          cat("=== NON-STRICT ===\n")
-          print(rokf::okf_validate(kb))
-          cat("=== STRICT (expect fail) ===\n")
-          print(tryCatch(rokf::okf_validate(kb, strict = TRUE),
-            error = function(e) paste("STRICT ERROR:", conditionMessage(e))))
+          cat("=== NON-STRICT (raw) ===\n")
+          bin <- rokf:::okf_bin()
+          res_ns <- processx::run(bin, c("validate", kb, "--json"),
+            error_on_status = FALSE)
+          cat("exit:", res_ns$status, "\n")
+          cat(res_ns$stdout, "\n")
+          cat("=== STRICT (raw) ===\n")
+          res_s <- processx::run(bin, c("validate", kb, "--strict", "--json"),
+            error_on_status = FALSE)
+          cat("exit:", res_s$status, "\n")
+          cat(res_s$stdout, "\n")
