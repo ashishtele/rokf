@@ -16,6 +16,7 @@ okf_bin <- function(verbose = FALSE) {
   bin_arch <- switch(arch,
     x86_64 = "amd64",
     amd64 = "amd64",
+    "x86-64" = "amd64",
     arm64 = "arm64",
     aarch64 = "arm64",
     stop("Unsupported architecture: ", arch)
